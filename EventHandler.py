@@ -1,4 +1,6 @@
 import pygame
+from GameStates.FrameRenderer import GameState
+from GameStates.FrameRenderer import FrameRenderer
 
 
 class EventHandler:
@@ -6,8 +8,12 @@ class EventHandler:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((1280, 720))
+        self.frame_renderer = FrameRenderer(self.screen)
         self.clock = pygame.time.Clock()
         self.dt = 0
+
+        self.game_state = GameState.TITLE
+
         self.running = True
 
     def deploy(self):
@@ -18,16 +24,11 @@ class EventHandler:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+                    break
 
-            # fill the screen with a color to wipe away anything from last frame
-            self.screen.fill("purple")
-
-            mouse_pos = pygame.mouse.get_pos()
-
-            pygame.draw.circle(self.screen, "red", mouse_pos, 40)
-
-
-
+            # Renders the game frame based on the menu the player is in
+            # Title, Settings, Game, etc
+            self.frame_renderer.render_frame(self.game_state)
 
             # flip() the display to put your work on screen
             pygame.display.flip()
