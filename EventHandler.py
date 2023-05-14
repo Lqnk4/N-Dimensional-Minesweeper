@@ -1,6 +1,6 @@
 import pygame
-from GameStates.FrameRenderer import GameState
-from GameStates.FrameRenderer import FrameRenderer
+from FrameRendering.FrameRenderer import GameState
+from FrameRendering.FrameRenderer import FrameRenderer
 
 
 class EventHandler:
@@ -9,6 +9,7 @@ class EventHandler:
         pygame.init()
         self.screen = pygame.display.set_mode((1280, 720))
         self.frame_renderer = FrameRenderer(self.screen)
+
         self.clock = pygame.time.Clock()
         self.dt = 0
 
@@ -25,6 +26,8 @@ class EventHandler:
                 if event.type == pygame.QUIT:
                     self.running = False
                     break
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pass
 
             # Renders the game frame based on the menu the player is in
             # Title, Settings, Game, etc
