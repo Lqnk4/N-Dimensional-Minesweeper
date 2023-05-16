@@ -1,7 +1,17 @@
 import numpy as np
+from itertools import product
 
 from Minesweeper.Cells import Cells
 from GameSettings import GameSettings
+
+
+# Might work even through negative cartesian coordinates
+def neighbors(index):
+    N = len(index)
+    for relative_index in product((-1, 0, 1), repeat=N):
+        if not all(i == 0 for i in relative_index):
+            yield tuple(i + i_rel for i, i_rel in zip(index, relative_index))
+
 
 
 def surrounding(x, idx, radius=1, fill=None):
