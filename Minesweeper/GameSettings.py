@@ -1,4 +1,3 @@
-import numpy as np
 
 class GameSettings:
     def __init__(self, dimensions: int, width: int, mine_count: int):

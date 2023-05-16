@@ -1,6 +1,8 @@
 import pygame
 from FrameRendering.FrameRenderer import GameState
 from FrameRendering.FrameRenderer import FrameRenderer
+from Minesweeper.GameBoard import neighbors, GameBoard
+from Minesweeper.GameSettings import GameSettings
 
 
 class EventHandler:
@@ -15,9 +17,17 @@ class EventHandler:
 
         self.game_state = GameState.TITLE
 
+        self.game_settings = GameSettings(4, 5, 6)
+
+        self.game_board = GameBoard(self.game_settings)
+
         self.running = True
 
     def deploy(self):
+
+        for i in neighbors((5,0,0), GameSettings(3,4,4)):
+            print(i)
+
 
         while self.running:
             # poll for events
