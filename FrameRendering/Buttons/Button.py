@@ -33,5 +33,6 @@ class Button:
         screen.blit(img, center)
 
     # Returns weather the mouse is over the cursor for animation purposes
-    def is_mouse_overed(self, mouse_pos: tuple[int, int]) -> bool:
+    def is_mouse_overed(self) -> bool:
+        mouse_pos = pygame.mouse.get_pos()
         return self.rect.left <= mouse_pos[0] <= self.rect.right and self.rect.top <= mouse_pos[1] <= self.rect.bottom

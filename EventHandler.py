@@ -29,7 +29,6 @@ class EventHandler:
 
         for idx in product(*[range(s) for s in self.game_board.game_board.shape]):
             cell = self.game_board.game_board[idx]
-            print(cell.number)
 
         while self.running:
             # poll for events
@@ -39,7 +38,9 @@ class EventHandler:
                     self.running = False
                     break
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
+                    for button in self.frame_renderer.get_active_buttons(self.game_state):
+                        pass
+
 
             # Renders the game frame based on the menu the player is in
             # Title, Settings, Game, etc
