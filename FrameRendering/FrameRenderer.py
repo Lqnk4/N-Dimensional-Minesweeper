@@ -1,6 +1,6 @@
 from enum import Enum
-
 import pygame
+
 
 
 # Class containing all menus in the game
@@ -17,7 +17,24 @@ class FrameRenderer:
     def __init__(self, screen: pygame.Surface | pygame.SurfaceType):
         self.screen = screen
 
-        self.base_font = pygame.font.SysFont("arial.ttf", 48)
+        self.base_font = pygame.font.SysFont("arial.ttf", 24)
+        self.med_font = pygame.font.SysFont("arial.ttf",48)
+        self.title_font = pygame.font.SysFont("arial.ttf", 96)
+        self.button_dict = {
+            GameState.TITLE: [b := Button((self.screen.get_width() / 2 - 250, self.screen.get_height() / 2 - 80),
+                                          (500, 120),
+                                          pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0), self.title_font,
+                                          "MINESWEEPER"),
+                              c := Button((self.screen.get_width() / 2-250, self.screen.get_height() / 2 + 30),
+                                          (500, 50),
+                                          pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0), self.med_font,
+                                          "Now in n-Dimensions!!!"),
+                              ],
+            GameState.SETTINGS: [],
+            GameState.CREDITS: [],
+            GameState.GAME: []
+
+        }
 
     # Method with match statement to decide what game menu to render based on the game state
     def render_frame(self, game_state: GameState):
@@ -26,6 +43,7 @@ class FrameRenderer:
 
         match game_state:
             case GameState.TITLE:
+
                 # fills the screen to overwrite anything from previous frame
                 self.screen.fill(background_color)
             case GameState.SETTINGS:
