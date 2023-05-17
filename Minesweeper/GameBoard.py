@@ -7,8 +7,6 @@ from Minesweeper.Cell import Cell
 from Minesweeper.GameSettings import GameSettings
 
 
-
-
 # Might work even through negative cartesian coordinates
 def neighbors(index, game_settings: GameSettings):
     N = len(index)
@@ -17,14 +15,10 @@ def neighbors(index, game_settings: GameSettings):
             yield tuple(i + i_rel for i, i_rel in zip(index, relative_index))
 
 
-
-
 class GameBoard:
     def __init__(self, game_settings: GameSettings):
         self.game_settings = game_settings
         self.game_board = np.ndarray((game_settings.width,) * game_settings.dimensions, 'O')
-
-
 
         shape = self.game_board.shape
         for idx in product(*[range(s) for s in shape]):
@@ -41,12 +35,10 @@ def get_cell_numbers(self):
         cell_indices = neighbors(idx, self.game_settings)
         for cell_index in cell_indices:
 
-            # TODO use this to break out of second for loop
-            for i in cell_index:
-                if i < 0 or i >= self.game_settings.width:
-                    continue
-                cell = self.game_board[cell_index]
+            if any(i < 0 or i >= self.game_settings.width for i in cell_index):
+                continue
+
+            cell = self.game_board[cell_index]
             if cell.bomb:
                 count += 1
         self.game_board[idx].number = count
-        count = 0

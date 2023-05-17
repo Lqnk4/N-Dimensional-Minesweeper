@@ -1,3 +1,5 @@
+from itertools import product
+
 import pygame
 from FrameRendering.FrameRenderer import GameState
 from FrameRendering.FrameRenderer import FrameRenderer
@@ -17,7 +19,7 @@ class EventHandler:
 
         self.game_state = GameState.TITLE
 
-        self.game_settings = GameSettings(4, 5, 6)
+        self.game_settings = GameSettings(2, 5, 25)
 
         self.game_board = GameBoard(self.game_settings)
 
@@ -25,9 +27,9 @@ class EventHandler:
 
     def deploy(self):
 
-        for i in neighbors((5,0,0), GameSettings(3,4,4)):
-            print(i)
-
+        for idx in product(*[range(s) for s in self.game_board.game_board.shape]):
+            cell = self.game_board.game_board[idx]
+            print(cell.number)
 
         while self.running:
             # poll for events
