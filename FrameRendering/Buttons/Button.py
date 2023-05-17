@@ -8,7 +8,7 @@ from pygame.font import Font
 class Button:
 
     # Makes a rectangular button in the form of (left, top) and (w, h)
-    def __init__(self, position: tuple[float, float], size: tuple[float, float], shape_color: Color, text_color: Color,
+    def __init__(self, position: tuple[float, float], size: tuple[float, float], shape_color: Color, text_color: Color=None,
                  font: Font = None, text: str = None):
         self.shape_color = shape_color
         self.text_color = text_color
@@ -29,8 +29,8 @@ class Button:
 
         # Works
         img = self.font.render(self.text, True, self.text_color, self.shape_color)
-        center = self.rect.center
-        screen.blit(img, center)
+        top_left = self.rect.topleft
+        screen.blit(img, top_left)
 
     # Returns weather the mouse is over the cursor for animation purposes
     def is_mouse_overed(self) -> bool:

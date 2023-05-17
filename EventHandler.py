@@ -1,9 +1,10 @@
 from itertools import product
 
 import pygame
-from FrameRendering.FrameRenderer import GameState
+
 from FrameRendering.FrameRenderer import FrameRenderer
-from Minesweeper.GameBoard import neighbors, GameBoard
+from FrameRendering.FrameRenderer import GameState
+from Minesweeper.GameBoard import GameBoard
 from Minesweeper.GameSettings import GameSettings
 
 

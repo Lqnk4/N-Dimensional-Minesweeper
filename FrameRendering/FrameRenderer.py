@@ -1,6 +1,7 @@
 from enum import Enum
 import pygame
 
+from FrameRendering.Buttons.Button import Button
 
 
 # Class containing all menus in the game
@@ -9,6 +10,8 @@ class GameState(Enum):
     TITLE = 0
     SETTINGS = 1
     CREDITS = 2
+    GAME = 3
+    LOADING = 4
 
 
 class FrameRenderer:
@@ -46,8 +49,20 @@ class FrameRenderer:
 
                 # fills the screen to overwrite anything from previous frame
                 self.screen.fill(background_color)
+
+                for button in self.button_dict.get(GameState.TITLE):
+                    button.render_button(self.screen)
+
+                mouse_pos = pygame.mouse.get_pos()
+
             case GameState.SETTINGS:
                 self.screen.fill(background_color)
 
             case GameState.CREDITS:
                 self.screen.fill(background_color)
+            case GameState.GAME:
+                self.screen.fill(background_color)
+
+
+    def get_active_buttons(self, game_state: GameState):
+        return self.button_dict.get(game_state)
