@@ -1,8 +1,9 @@
 from enum import Enum
 import pygame
 from FrameRendering.Buttons.Button import Button
-
-
+from Minesweeper.GameBoard import GameBoard
+from itertools import product
+from FrameRendering.Buttons.Tile import Tile
 # Class containing all menus in the game
 # Might be associated with buttons in the future
 class GameState(Enum):
@@ -35,7 +36,12 @@ class FrameRenderer:
                               },
             GameState.SETTINGS: {},
             GameState.CREDITS: {},
-            GameState.GAME: {}
+            GameState.GAME: {
+
+                buttons_start(self.game_board)
+
+
+            }
 
         }
 
