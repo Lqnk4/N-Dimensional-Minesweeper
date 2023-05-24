@@ -4,6 +4,8 @@ from FrameRendering.Buttons.Button import Button
 from Minesweeper.GameBoard import GameBoard
 from itertools import product
 from FrameRendering.Buttons.Tile import Tile
+
+
 # Class containing all menus in the game
 # Might be associated with buttons in the future
 class GameState(Enum):
@@ -29,19 +31,15 @@ class FrameRenderer:
                                               pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0),
                                               self.title_font,
                                               "MINESWEEPER"),
-                              "Header": ((self.screen.get_width() / 2 - 250, self.screen.get_height() / 2 + 30),
-                                         (500, 50),
-                                         pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0), self.med_font,
-                                         "Now in n-Dimensions!!!",),
+                              "Start": Button((self.screen.get_width() / 2 - 250, self.screen.get_height() / 2 + 30),
+                                              (500, 50),
+                                              pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0),
+                                              self.med_font,
+                                              "Now in n-Dimensions!!!", ),
                               },
             GameState.SETTINGS: {},
             GameState.CREDITS: {},
-            GameState.GAME: {
-
-                buttons_start(self.game_board)
-
-
-            }
+            GameState.GAME: {}
 
         }
 
@@ -56,10 +54,10 @@ class FrameRenderer:
                 # fills the screen to overwrite anything from previous frame
                 self.screen.fill(background_color)
 
-                for button_key, button_val in self.button_dict.get(GameState.TITLE).items():
-                    button_val.render_button()
-
                 mouse_pos = pygame.mouse.get_pos()
+
+                for button in self.button_dict.get(GameState.TITLE).values():
+                    button.render_button(self.screen)
 
             case GameState.SETTINGS:
                 self.screen.fill(background_color)
@@ -69,5 +67,5 @@ class FrameRenderer:
             case GameState.GAME:
                 self.screen.fill(background_color)
 
-    def get_active_buttons(self, game_state: GameState):
-        return self.button_dict.get(game_state).items()
+    def get_active_buttons(self, game_state: GameState) -> dict:
+        return self.button_dict.get(game_state)

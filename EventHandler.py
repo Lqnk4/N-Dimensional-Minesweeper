@@ -39,11 +39,14 @@ class EventHandler:
                     self.running = False
                     break
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    for button_key, button in self.frame_renderer.get_active_buttons(self.game_state):
-                        if button_key == "Title":
-                            self.game_state = GameState.CREDITS
-                        if button_key == "Header":
-                            self.game_state = GameState.SETTINGS
+                    for button_key, button in self.frame_renderer.get_active_buttons(self.game_state).items():
+                        if button.is_mouse_overed():
+
+                            if button_key == "Title":
+                                pass
+                            if button_key == "Start":
+                                self.game_state = GameState.SETTINGS
+
 
 
             # Renders the game frame based on the menu the player is in

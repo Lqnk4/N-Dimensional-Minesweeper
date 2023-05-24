@@ -18,16 +18,14 @@ class Tile(Button):
 
         self.font = pygame.sysfont.SysFont(None, 24)
 
-
-
     def render_button(self, screen: Surface | SurfaceType):
         pygame.draw.rect(screen, self.shape_color, self.rect)
         if self.cell.flag:
             img = pygame.image.load_basic("FrameRendering/Sprites/564-5642137_a-pixel-art-trans-flag-i-made-flag.png")
-            screen.blit(img, self.rect.center)
+            screen.blit(img, self.rect.topleft)
         elif self.cell.clear:
-            if n:= self.cell.number > 0:
-                img = font
+            if n := self.cell.number > 0:
+                img = self.font.render(n)
                 screen.blit(img, self.rect.topleft)
             else:
                 self.shape_color = self.clear_color
