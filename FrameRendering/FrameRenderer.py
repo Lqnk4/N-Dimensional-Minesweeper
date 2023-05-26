@@ -4,6 +4,7 @@ from FrameRendering.Buttons.Button import Button
 from Minesweeper.GameBoard import GameBoard
 from itertools import product
 from FrameRendering.Buttons.Tile import Tile
+from Minesweeper.GameBoard import GameBoard
 
 
 # Class containing all menus in the game
@@ -37,7 +38,14 @@ class FrameRenderer:
                                               self.med_font,
                                               "Now in n-Dimensions!!!", ),
                               },
-            GameState.SETTINGS: {},
+            GameState.SETTINGS: {
+                "Dimension_Counter": Button((self.screen.get_width() / 4, self.screen.get_height() / 2), (
+                    self.screen.get_width() / 6, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Dimension_Counter"),
+                "Width Counter": Button((self.screen.get_width() * 3 / 4, self.screen.get_height() / 2), (
+                    self.screen.get_width() / 6, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Width Counter")
+            },
             GameState.CREDITS: {},
             GameState.GAME: {}
 

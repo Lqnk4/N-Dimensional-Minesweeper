@@ -35,3 +35,4 @@ class Button:
     def is_mouse_overed(self) -> bool:
         mouse_pos = pygame.mouse.get_pos()
         return self.rect.left <= mouse_pos[0] <= self.rect.right and self.rect.top <= mouse_pos[1] <= self.rect.bottom
+

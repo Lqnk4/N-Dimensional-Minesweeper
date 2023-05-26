@@ -44,33 +44,3 @@ def get_cell_numbers(self):
             if cell.bomb:
                 count += 1
         self.game_board[idx].number = count
-def buttons_start(self):
-    x = 50
-    y = 40
-    x_start = 50
-    y_start = 40
-
-    if(game_settings.dimensions%2 == 0):
-        x_end = 50 + 30*game_settings.width^(game_settings.dimensions//2)+ 30*(game_settings.width^((game_setting.dimensions-2)/2)-2)
-        y_end = 40 + 30*game_settings.width^(game_settings.dimensions//2)+ 30*(game_settings.width^((game_setting.dimensions-2)/2)-2)
-    else:
-        x_end = 50 + 30*game_settings.width^(game_settings.dimensions//2)+ 30*(game_settings.width^(game_setting.dimensions//2)-2)
-        y_end = 40 + 30 *game_settings.width ^ ((game_settings.dimensions-1) // 2) + 30 * (game_settings.width ^ ((game_settings.dimensions - 3)/2) - 2)
-    buttons = np.ndarray((game_settings.width,) * game_settings.dimensions, 'O')
-
-    idx: tuple[Any, ...] | Any
-    for idx in product(*[range(s) for s in self.game_board.shape]):
-        buttons[idx] = Tile((x,y),(30,30), self.game_board[idx])
-        if((x-50-30*game_settings.width-1)%(game_settings.width*30) != 0):
-            x += 30
-        elif((y-40-30*game_settings.width-1)%(game_settings.width*30) != 0):
-            y += 30
-            x -= 30*(game_settings.width-1)
-        elif(x != x_end):
-            x += 60
-            y -= 30*(game_settings.width-1)
-        else:
-            y += 60
-            x = x_start
-        render_button(buttons[idx])
-    return buttons
