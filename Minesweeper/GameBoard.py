@@ -28,19 +28,19 @@ class GameBoard:
 
         for cell in np.random.choice(self.game_board.flatten(), game_settings.mine_count, False):
             cell.bomb = True
-        get_cell_numbers(self)
+        self.get_cell_numbers()
 
 
-def get_cell_numbers(self):
-    for idx in product(*[range(s) for s in self.game_board.shape]):
-        count = 0
-        cell_indices = neighbors(idx, self.game_settings)
-        for cell_index in cell_indices:
+    def get_cell_numbers(self):
+        for idx in product(*[range(s) for s in self.game_board.shape]):
+            count = 0
+            cell_indices = neighbors(idx, self.game_settings)
+            for cell_index in cell_indices:
 
-            if any(i < 0 or i >= self.game_settings.width for i in cell_index):
-                continue
+                if any(i < 0 or i >= self.game_settings.width for i in cell_index):
+                    continue
 
-            cell = self.game_board[cell_index]
-            if cell.bomb:
-                count += 1
-        self.game_board[idx].number = count
+                cell = self.game_board[cell_index]
+                if cell.bomb:
+                    count += 1
+            self.game_board[idx].number = count

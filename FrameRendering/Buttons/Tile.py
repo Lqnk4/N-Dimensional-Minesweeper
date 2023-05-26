@@ -21,7 +21,7 @@ class Tile(Button):
     def render_button(self, screen: Surface | SurfaceType):
         pygame.draw.rect(screen, self.shape_color, self.rect)
         if self.cell.flag:
-            img = pygame.image.load_basic("FrameRendering/Sprites/564-5642137_a-pixel-art-trans-flag-i-made-flag.png")
+            img = pygame.image.load("FrameRendering/Sprites/564-5642137_a-pixel-art-trans-flag-i-made-flag.png")
             screen.blit(img, self.rect.topleft)
         elif self.cell.clear:
             if n := self.cell.number > 0:
@@ -29,8 +29,9 @@ class Tile(Button):
                 screen.blit(img, self.rect.topleft)
             else:
                 self.shape_color = self.clear_color
-        elif self.cell.bomb:
-            img = pygame.image.load_basic("path to bomb")
-            screen.blit(img, self.rect.center)
         else:
             self.shape_color = self.default_color
+
+    def render_bomb(self, screen: Surface | SurfaceType):
+        img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0.png")
+        screen.blit(img, self.rect.topleft)

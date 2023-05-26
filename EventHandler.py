@@ -44,14 +44,22 @@ class EventHandler:
 
                             if button_key == "Title":
                                 pass
-                            if button_key == "Start":
-                                self.game_state = GameState.SETTINGS
+                            elif button_key == "Start":
+                                self.game_state = GameState.GAME
+                            elif button_key == "Dimension_Counter":
+                                self.game_settings.dimensions += 1
+                            elif button_key == "Width Counter":
+                                self.game_settings.width += 1
+
+                    if self.game_state == GameState.GAME:
+
+
 
 
 
             # Renders the game frame based on the menu the player is in
             # Title, Settings, Game, etc
-            self.frame_renderer.render_frame(self.game_state)
+            self.frame_renderer.render_frame(self.game_state, self.game_settings, self.game_board)
 
             # flip() the display to put your work on screen
             pygame.display.flip()

@@ -5,6 +5,7 @@ from Minesweeper.GameBoard import GameBoard
 from itertools import product
 from FrameRendering.Buttons.Tile import Tile
 from Minesweeper.GameBoard import GameBoard
+from Minesweeper.GameSettings import GameSettings
 
 
 # Class containing all menus in the game
@@ -52,7 +53,7 @@ class FrameRenderer:
         }
 
     # Method with match statement to decide what game menu to render based on the game state
-    def render_frame(self, game_state: GameState):
+    def render_frame(self, game_state: GameState, game_settings: GameSettings, game_board: GameBoard):
 
         background_color = pygame.color.Color(36, 36, 36)
 
@@ -69,11 +70,17 @@ class FrameRenderer:
 
             case GameState.SETTINGS:
                 self.screen.fill(background_color)
+                for button in self.button_dict.get(GameState.SETTINGS).values():
+                    button.render_button(self.screen)
 
             case GameState.CREDITS:
                 self.screen.fill(background_color)
             case GameState.GAME:
                 self.screen.fill(background_color)
+                buttons = game_board.buttons_start()
+                for idx in product(*[range(s) for s in buttons.shape]):
+                    buttons[idx].render_button(self.screen)
+
 
     def get_active_buttons(self, game_state: GameState) -> dict:
         return self.button_dict.get(game_state)
