@@ -35,3 +35,6 @@ class Tile(Button):
     def render_bomb(self, screen: Surface | SurfaceType):
         img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0.png")
         screen.blit(img, self.rect.topleft)
+
+    def is_mouse_overed(self) -> bool:
+        super().is_mouse_overed()

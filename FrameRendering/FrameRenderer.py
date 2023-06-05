@@ -77,9 +77,8 @@ class FrameRenderer:
                 self.screen.fill(background_color)
             case GameState.GAME:
                 self.screen.fill(background_color)
-                buttons = game_board.buttons_start()
-                for idx in product(*[range(s) for s in buttons.shape]):
-                    buttons[idx].render_button(self.screen)
+                for idx in product(*[range(s) for s in game_board.tile_board.shape]):
+                    game_board.tile_board[idx].render_button(self.screen)
 
 
     def get_active_buttons(self, game_state: GameState) -> dict:

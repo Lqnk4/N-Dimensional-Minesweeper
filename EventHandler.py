@@ -28,8 +28,8 @@ class EventHandler:
 
     def deploy(self):
 
-        for idx in product(*[range(s) for s in self.game_board.game_board.shape]):
-            cell = self.game_board.game_board[idx]
+        pygame.mixer.music.load("Music/for-elevator-jazz-music-124005.mp3")
+        pygame.mixer.music.play(-1)
 
         while self.running:
             # poll for events
@@ -39,6 +39,7 @@ class EventHandler:
                     self.running = False
                     break
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    click_button = event.button
                     for button_key, button in self.frame_renderer.get_active_buttons(self.game_state).items():
                         if button.is_mouse_overed():
 
@@ -52,6 +53,7 @@ class EventHandler:
                                 self.game_settings.width += 1
 
                     if self.game_state == GameState.GAME:
+                        pass
 
 
 
