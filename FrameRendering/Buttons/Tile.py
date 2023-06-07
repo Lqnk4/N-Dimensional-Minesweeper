@@ -10,6 +10,8 @@ class Tile(Button):
         self.default_color = pygame.color.Color(161, 157, 146)
         self.hover_color = pygame.color.Color(255, 255, 255)
         self.clear_color = pygame.color.Color(199, 182, 181)
+        self.light_grass_color = pygame.color.Color(63, 155, 11)
+        self.dark_grass_color = pygame.color.Color(56, 128, 4)
 
         super().__init__(position, size, self.default_color)
         self.cell = cell
@@ -20,21 +22,12 @@ class Tile(Button):
 
     def render_button(self, screen: Surface | SurfaceType):
         pygame.draw.rect(screen, self.shape_color, self.rect)
-        if self.cell.flag:
-            img = pygame.image.load("FrameRendering/Sprites/564-5642137_a-pixel-art-trans-flag-i-made-flag.png")
-            screen.blit(img, self.rect.topleft)
-        elif self.cell.clear:
-            if n := self.cell.number > 0:
-                img = self.font.render(n)
-                screen.blit(img, self.rect.topleft)
-            else:
-                self.shape_color = self.clear_color
-        else:
-            self.shape_color = self.default_color
+        number_image = self.font.render(str(self.cell.number), False, pygame.color.Color(255,0,0))
+        screen.blit(number_image, self.rect.topleft)
 
     def render_bomb(self, screen: Surface | SurfaceType):
         img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0.png")
         screen.blit(img, self.rect.topleft)
 
     def is_mouse_overed(self) -> bool:
-        super().is_mouse_overed()
+        return super().is_mouse_overed()

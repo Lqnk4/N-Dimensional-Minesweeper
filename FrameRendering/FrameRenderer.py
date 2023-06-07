@@ -33,19 +33,24 @@ class FrameRenderer:
                                               pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0),
                                               self.title_font,
                                               "MINESWEEPER"),
-                              "Start": Button((self.screen.get_width() / 2 - 250, self.screen.get_height() / 2 + 30),
+                              "Title_Start": Button((self.screen.get_width() / 2 - 250, self.screen.get_height() / 2 + 30),
                                               (500, 50),
                                               pygame.color.Color(0, 154, 23), pygame.color.Color(0, 0, 0),
                                               self.med_font,
                                               "Now in n-Dimensions!!!", ),
                               },
             GameState.SETTINGS: {
-                "Dimension_Counter": Button((self.screen.get_width() / 4, self.screen.get_height() / 2), (
-                    self.screen.get_width() / 6, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                "Dimension_Counter": Button((140, 100), (320, self.screen.get_height() / 6),
+                                            pygame.color.Color(0, 154, 23),
                                             pygame.color.Color(0, 0, 0), self.med_font, "Dimension_Counter"),
-                "Width Counter": Button((self.screen.get_width() * 3 / 4, self.screen.get_height() / 2), (
+                "dimension_decrement": Button((140, 380), (320, self.screen.get_height() / 6),
+                                            pygame.color.Color(0, 154, 23),
+                                            pygame.color.Color(0, 0, 0), self.med_font, ""),
+                "Width Counter": Button((800, 100),  (320, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Width Counter"),
+                "Game Start": Button((550, 450), (
                     self.screen.get_width() / 6, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
-                                            pygame.color.Color(0, 0, 0), self.med_font, "Width Counter")
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Game Start")
             },
             GameState.CREDITS: {},
             GameState.GAME: {}
@@ -70,8 +75,17 @@ class FrameRenderer:
 
             case GameState.SETTINGS:
                 self.screen.fill(background_color)
+
+                mouse_pos = self.base_font.render(str(pygame.mouse.get_pos()), False, pygame.Color(255,255,255))
+                self.screen.blit(mouse_pos, (1100, 50))
+
                 for button in self.button_dict.get(GameState.SETTINGS).values():
                     button.render_button(self.screen)
+                dim_count_image = self.med_font.render(str(game_settings.dimensions), False, pygame.Color(255, 255, 255))
+                self.screen.blit(dim_count_image, (290, 275))
+                dim_down_image = self.med_font.render("Down", False, pygame.Color(255, 255, 255))
+                width_count_image = self.med_font.render(str(game_settings.width),  False, pygame.Color(255, 255, 255))
+                self.screen.blit(width_count_image, (960, 275))
 
             case GameState.CREDITS:
                 self.screen.fill(background_color)

@@ -20,7 +20,7 @@ class EventHandler:
 
         self.game_state = GameState.TITLE
 
-        self.game_settings = GameSettings(2, 5, 25)
+        self.game_settings = GameSettings(3, 5, 125)
 
         self.game_board = GameBoard(self.game_settings)
 
@@ -45,7 +45,7 @@ class EventHandler:
 
                             if button_key == "Title":
                                 pass
-                            elif button_key == "Start":
+                            elif button_key == "Title_Start":
                                 self.game_state = GameState.GAME
                             elif button_key == "Dimension_Counter":
                                 self.game_settings.dimensions += 1

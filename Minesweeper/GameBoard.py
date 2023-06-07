@@ -51,51 +51,64 @@ class GameBoard:
             self.game_board[idx].number = count
 
     def buttons_start(self) -> numpy.ndarray:
+        # grid = self.game_board.reshape(self.game_board[0], -1)
+
+        # x = 0
+        # y = 0
+        # x_start = 64
+        # y_start = 96
+        #
+        # tile_width = 32
+        #
+        # if self.game_settings.dimensions % 2 == 0:
+        #
+        #     x = (self.game_settings.width)**(self.game_setting.dimensions/2)
+        #     y = (self.game_settings.width)**(self.game_setting.dimensions/2)
+        # else:
+        #     x = (self.game_settings.width)**(self.game_setting.dimensions//2 +1)
+        #     y = (self.game_settings.width)**(self.game_setting.dimensions//2)
+        # for i in range(y):
+        #     for i in range(x):
+        #         grid[(x,y)] = Tile(, (32, 32), grid[(x,y)])
+
+
+
         x = 50
         y = 40
         x_start = 50
+        y_start = 40
+        y_space = 0
+        x_space = 0
         wide = 32
-        evenOrOdd = self.game_setting.dimensions%2
-        buttons = 
-        # if evenOrOdd == 0:
-        #     x_end = wide*(self.game_settings.width)**(self.game_setting.dimensions/2)
-        #     y_end = wide*(self.game_settings.width)**(self.game_setting.dimensions/2)
-        # else:
-        #     x_end = wide*(self.game_settings.width)**(self.game_setting.dimensions//2 +1)
-        #     y_end = wide*(self.game_settings.width)**(self.game_setting.dimensions//2)
-        # buttons = np.ndarray((self.game_settings.width,) * self.game_settings.dimensions, 'O')
-        # while y < y_end:
-        #     while x < x_end:
-        #         buttons[]
-        #
-        #         pass
-        # if self.game_settings.dimensions == 2:
-        #     x_end = wide * (self.game_settings.width - 1) + x
-        # elif self.game_settings.dimensions <= 4:
-        #     x_end = wide * (self.game_settings.width * self.game_settings.width - 1) + wide * (
-        #                 self.game_settings.width - 1) + x
-        # else:
-        #     x_end = wide * (self.game_settings.width ** 3 - 1) + wide * (
-        #                 self.game_settings.width * self.game_settings.width - 1) + x
-        #
-        # buttons = np.ndarray((self.game_settings.width,) * self.game_settings.dimensions, 'O')
-        #
-        # idx: tuple[Any, ...] | Any
-        # for idx in product(*[range(s) for s in self.game_board.shape]):
-        #     buttons[idx] = Tile((x, y), (wide, wide), self.game_board[idx])
-        #     if (x - wide * (self.game_settings.width - 1)) % (self.game_settings.width * wide) != x_start:
-        #         x += wide
-        #     elif (y - wide * (self.game_settings.width - 1)) % (self.game_settings.width * wide) != y_start:
-        #         y += wide
-        #         x -= wide * (self.game_settings.width - 1)
-        #     elif x != x_end:
-        #         x += wide * 2
-        #         y -= wide * (self.game_settings.width - 1)
-        #     else:
-        #         y += 2*wide
-        #         x = x_start
-        #
-        # return buttons
+
+        evenOrOdd = self.game_settings.dimensions%2
+        if evenOrOdd == 0:
+            x_end = wide*(self.game_settings.width)**(self.game_settings.dimensions//2)-wide+x_start
+        else:
+            x_end = wide*(self.game_settings.width)**(self.game_settings.dimensions//2 +1)-wide+x_start
+        tiles = np.ndarray((self.game_settings.width,) * self.game_settings.dimensions, 'O')
+
+
+        idx: tuple[Any, ...] | Any
+        for idx in product(*[range(s) for s in self.game_board.shape]):
+            tiles[idx] = Tile((x+x_space, y+y_space), (wide, wide), self.game_board[idx])
+            if sum(idx) % 2 ==0:
+                tiles[idx].default_color = pygame.Color(56, 128, 4)
+            if (x-wide*(self.game_settings.width-1))%(wide*self.game_settings.width) != x_start:
+                x += wide
+            elif (y-wide*(self.game_settings.width-1))%(wide*self.game_settings.width) != y_start:
+                y += wide
+                x -= wide*(self.game_settings.width-1)
+            elif x != x_end:
+                x += wide
+                x_space += wide
+                y -= wide*(self.game_settings.width-1)
+            else:
+                x = x_start
+                x_space = 0
+                y += wide
+                y_space += wide
+        return tiles
 
     def update_game_board(self, click_button: int ) -> None:
         for idx in product(*[range(s) for s in self.tile_board.shape]):
