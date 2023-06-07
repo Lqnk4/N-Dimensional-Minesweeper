@@ -1,21 +1,21 @@
 
 class GameSettings:
     def __init__(self, dimensions: int, width: int, mine_count: int):
-        if(dimensions > 5):
-            self.dimensions = 5
-        elif(dimensions < 2):
-            self.dimensions = 2
+        if dimensions > 6 :
+            self.dimensions = 6
+        elif dimensions < 1:
+            self.dimensions = 1
         else:
             self.dimensions = dimensions
 
-        if(width >= 10):
+        if width >= 10:
             self.width = 10
-        elif(width < 3):
-            self.width = 3
+        elif width < 2:
+            self.width = 2
         else:
             self.width = width
-        if(mine_count > width**dimensions):
-            self.mine_count == width**dimensions
+        if mine_count > width**dimensions :
+            self.mine_count = width**dimensions
         else:
             self.mine_count = mine_count
 

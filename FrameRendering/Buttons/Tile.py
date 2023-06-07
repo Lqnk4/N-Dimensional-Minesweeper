@@ -16,7 +16,7 @@ class Tile(Button):
         super().__init__(position, size, self.default_color)
         self.cell = cell
 
-        self.shape_color = self.default_color
+        self.shape_color = self.light_grass_color
 
         self.font = pygame.sysfont.SysFont(None, 24)
 

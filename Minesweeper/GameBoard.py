@@ -49,6 +49,7 @@ class GameBoard:
                 if cell.bomb:
                     count += 1
             self.game_board[idx].number = count
+        
 
     def buttons_start(self) -> numpy.ndarray:
         # grid = self.game_board.reshape(self.game_board[0], -1)

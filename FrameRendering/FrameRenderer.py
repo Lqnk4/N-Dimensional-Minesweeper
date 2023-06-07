@@ -62,6 +62,7 @@ class FrameRenderer:
 
         background_color = pygame.color.Color(36, 36, 36)
 
+
         match game_state:
             case GameState.TITLE:
 
