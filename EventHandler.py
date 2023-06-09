@@ -20,7 +20,7 @@ class EventHandler:
 
         self.game_state = GameState.TITLE
 
-        self.game_settings = GameSettings(3, 5, 125)
+        self.game_settings = GameSettings(3, 5, 125) # Default Values
 
         self.game_board = GameBoard(self.game_settings)
 
@@ -43,14 +43,28 @@ class EventHandler:
                     for button_key, button in self.frame_renderer.get_active_buttons(self.game_state).items():
                         if button.is_mouse_overed():
 
-                            if button_key == "Title":
-                                pass
-                            elif button_key == "Title_Start":
-                                self.game_state = GameState.GAME
-                            elif button_key == "Dimension_Counter":
-                                self.game_settings.dimensions += 1
-                            elif button_key == "Width Counter":
-                                self.game_settings.width += 1
+                            match button_key:
+                                case"Title":
+                                    pass
+                                case "Title_Start":
+                                    self.game_state = GameState.SETTINGS
+                                case "Dimension_Counter":
+                                    self.game_settings.dimensions += 1
+                                case "dimension_decrement":
+                                    self.game_settings.dimensions -= 1
+                                case "Width Counter":
+                                    self.game_settings.width += 1
+                                case "Width Decrement":
+                                    self.game_settings.width -= 1
+                                case "Mine Counter":
+                                    self.game_settings.mine_count +=5
+                                case "Mine Decrement":
+                                    self.game_settings.mine_count -=5
+                                case "Game Start":
+                                    self.game_board = GameBoard(self.game_settings)
+                                    self.game_state = GameState.GAME
+                            break
+
 
                     if self.game_state == GameState.GAME:
                         pass

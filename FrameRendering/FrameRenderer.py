@@ -42,15 +42,22 @@ class FrameRenderer:
             GameState.SETTINGS: {
                 "Dimension_Counter": Button((140, 100), (320, self.screen.get_height() / 6),
                                             pygame.color.Color(0, 154, 23),
-                                            pygame.color.Color(0, 0, 0), self.med_font, "Dimension_Counter"),
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Dimension Counter"),
                 "dimension_decrement": Button((140, 380), (320, self.screen.get_height() / 6),
                                             pygame.color.Color(0, 154, 23),
                                             pygame.color.Color(0, 0, 0), self.med_font, ""),
-                "Width Counter": Button((800, 100),  (320, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                "Width Counter": Button((505, 100),  (320, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
                                             pygame.color.Color(0, 0, 0), self.med_font, "Width Counter"),
-                "Game Start": Button((550, 450), (
+                "Width Decrement": Button((505, 380), (320, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                                        pygame.color.Color(0, 0, 0), self.med_font, ""),
+                "Game Start": Button((550, 575), (
                     self.screen.get_width() / 6, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
-                                            pygame.color.Color(0, 0, 0), self.med_font, "Game Start")
+                                            pygame.color.Color(0, 0, 0), self.med_font, "Game Start"),
+                "Mine Counter": Button((880, 100), (320, self.screen.get_height() / 6), pygame.color.Color(0, 154, 23),
+                                        pygame.color.Color(0, 0, 0), self.med_font, "Mine Counter"),
+                "Mine Decrement": Button((880, 380), (320, self.screen.get_height() / 6),
+                                          pygame.color.Color(0, 154, 23),
+                                          pygame.color.Color(0, 0, 0), self.med_font, ""),
             },
             GameState.CREDITS: {},
             GameState.GAME: {}
@@ -84,9 +91,15 @@ class FrameRenderer:
                     button.render_button(self.screen)
                 dim_count_image = self.med_font.render(str(game_settings.dimensions), False, pygame.Color(255, 255, 255))
                 self.screen.blit(dim_count_image, (290, 275))
-                dim_down_image = self.med_font.render("Down", False, pygame.Color(255, 255, 255))
+                dim_down_image = self.med_font.render("Down", False, pygame.Color(0, 0, 0))
+                self.screen.blit(dim_down_image, (240, 423))
                 width_count_image = self.med_font.render(str(game_settings.width),  False, pygame.Color(255, 255, 255))
-                self.screen.blit(width_count_image, (960, 275))
+                self.screen.blit(width_count_image, (650, 275))
+                self.screen.blit(dim_down_image, (600, 423))
+                mine_count_image = self.med_font.render(str(game_settings.mine_count), False, pygame.Color(255, 255, 255))
+                self.screen.blit(mine_count_image, (1040, 275))
+                self.screen.blit(dim_down_image, (1000, 423))
+
 
             case GameState.CREDITS:
                 self.screen.fill(background_color)

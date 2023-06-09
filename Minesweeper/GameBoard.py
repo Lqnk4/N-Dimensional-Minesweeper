@@ -113,9 +113,9 @@ class GameBoard:
 
     def update_game_board(self, click_button: int ) -> None:
         for idx in product(*[range(s) for s in self.tile_board.shape]):
-            if self.tile_board[idx].is_mouse_overred():
+            if self.tile_board[idx].is_mouse_overed():
                 if click_button == 1:
                     self.tile_board[idx].clear = True
                 if click_button == 3:
-                    self.tile_board[idx].flag = not self.tile_board[idx].flag
+                    self.tile_board[idx].cell.flag = not self.tile_board[idx].cell.flag
 
