@@ -84,7 +84,7 @@ class GameBoard:
 
         evenOrOdd = self.game_settings.dimensions%2
         if evenOrOdd == 0:
-            x_end = wide*(self.game_settings.width)**(self.game_settings.dimensions//2)-wide+x_start
+            x_end = wide * self.game_settings.width ** (self.game_settings.dimensions // 2) - wide + x_start
         else:
             x_end = wide*(self.game_settings.width)**(self.game_settings.dimensions//2 +1)-wide+x_start
         tiles = np.ndarray((self.game_settings.width,) * self.game_settings.dimensions, 'O')
@@ -93,8 +93,8 @@ class GameBoard:
         idx: tuple[Any, ...] | Any
         for idx in product(*[range(s) for s in self.game_board.shape]):
             tiles[idx] = Tile((x+x_space, y+y_space), (wide, wide), self.game_board[idx])
-            if sum(idx) % 2 ==0:
-                tiles[idx].default_color = pygame.Color(56, 128, 4)
+            if sum(idx) % 2 == 0:
+                tiles[idx].shape_color = pygame.Color(56, 128, 4)  # Dark grass color
             if (x-wide*(self.game_settings.width-1))%(wide*self.game_settings.width) != x_start:
                 x += wide
             elif (y-wide*(self.game_settings.width-1))%(wide*self.game_settings.width) != y_start:

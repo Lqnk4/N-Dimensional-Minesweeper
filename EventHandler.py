@@ -39,7 +39,10 @@ class EventHandler:
                     self.running = False
                     break
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    click_button = event.button
+                    click_button = event.button # 1 is left click, 3 is right click
+                    if self.game_state == GameState.GAME:
+                        self.game_board.update_game_board(click_button)
+                        break
                     for button_key, button in self.frame_renderer.get_active_buttons(self.game_state).items():
                         if button.is_mouse_overed():
 
@@ -66,8 +69,8 @@ class EventHandler:
                             break
 
 
-                    if self.game_state == GameState.GAME:
-                        pass
+
+
 
 
 

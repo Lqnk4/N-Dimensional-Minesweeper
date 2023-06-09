@@ -9,6 +9,7 @@ class Tile(Button):
     def __init__(self, position: tuple[float, float], size: tuple[float, float], cell: Cell):
         self.light_grass_color = pygame.color.Color(63, 155, 11)
         self.dark_grass_color = pygame.color.Color(56, 128, 4)
+        self.light_gray = pygame.color.Color(211, 211, 211)
 
         super().__init__(position, size, self.light_grass_color)
         self.cell = cell
