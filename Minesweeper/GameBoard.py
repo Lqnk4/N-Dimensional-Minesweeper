@@ -50,7 +50,8 @@ class GameBoard:
                 if cell.bomb:
                     count += 1
             self.game_board[idx].number = count
-        
+
+
 
     def buttons_start(self) -> numpy.ndarray:
         # grid = self.game_board.reshape(self.game_board[0], -1)
@@ -116,9 +117,27 @@ class GameBoard:
         count_max = self.game_settings.width ** self.game_settings.dimensions - self.game_settings.mine_count
         count = 0
         for idx in product(*[range(s) for s in self.tile_board.shape]):
+
+            if self.tile_board[idx].cell.clear:
+                count += 1
             if self.tile_board[idx].is_mouse_overed():
                 if click_button == 1:
-                    self.tile_board[idx].clear = True
-                if click_button == 3:
-                    self.tile_board[idx].cell.flag = not self.tile_board[idx].cell.flag
+                    self.tile_board[idx].cell.clear = True
+                    count += 1
+                    if self.tile_board[idx].cell.number == 0:
+                        # for index in neighbors(idx, self.game_settings):
+                        #     count += 1
+                        #     self.tile_board[index].cell.clear = True
+                        pass
+                    if self.tile_board[idx].cell.bomb:
+                        # return -1
+                        pass
 
+                if click_button == 3 and not self.tile_board[idx].cell.bomb:
+                    self.tile_board[idx].cell.flag = not self.tile_board[idx].cell.flag
+            if count == count_max:
+                # return 1
+                pass
+            else:
+                #return 0
+                pass
