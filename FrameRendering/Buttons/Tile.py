@@ -14,20 +14,21 @@ class Tile(Button):
         super().__init__(position, size, self.light_grass_color)
         self.cell = cell
 
-        self.font = pygame.sysfont.SysFont(None, 24)
+        self.font = pygame.sysfont.SysFont(None, 32)
 
     def render_button(self, screen: Surface | SurfaceType):
         pygame.draw.rect(screen, self.shape_color, self.rect)
         flag_img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0.png")
         bomb_img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0_4.png")
-        if self.cell.flag:
-            screen.blit(flag_img, self.rect.topleft)
-        if self.cell.clear:
-            pass
 
         if self.cell.bomb and self.cell.clear:
             screen.blit(bomb_img, self.rect.topleft)
-
+        elif self.cell.clear:
+            self.shape_color = self.light_gray
+            number_img = self.font.render(str(self.cell.number), False, pygame.Color(250, 0, 0))
+            screen.blit(number_img, self.rect.topleft)
+        elif self.cell.flag:
+            screen.blit(flag_img, self.rect.topleft)
 
 
     def render_bomb(self, screen: Surface | SurfaceType):

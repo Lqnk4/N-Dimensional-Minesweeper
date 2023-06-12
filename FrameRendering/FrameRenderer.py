@@ -105,9 +105,17 @@ class FrameRenderer:
                 self.screen.fill(background_color)
             case GameState.GAME:
                 self.screen.fill(background_color)
+                flag_count = game_settings.mine_count
                 for idx in product(*[range(s) for s in game_board.tile_board.shape]):
                     game_board.tile_board[idx].render_button(self.screen)
+                    if game_board.tile_board[idx].cell.flag:
+                        flag_count -= 1
 
+                # Flag Counter
+                flag_count_img = self.med_font.render(str(flag_count), False, pygame.Color(255, 255, 255))
+                self.screen.blit(flag_count_img, (1150, 40))
+                flag_img = pygame.image.load("FrameRendering/Sprites/pixil-frame-0.png")
+                self.screen.blit(flag_img, (1100, 40))
 
     def get_active_buttons(self, game_state: GameState) -> dict:
         return self.button_dict.get(game_state)

@@ -6,6 +6,7 @@ from itertools import product
 
 import pygame.event
 
+import EventHandler
 from FrameRendering.Buttons.Tile import Tile
 from numpy.array_api import astype
 
@@ -111,7 +112,9 @@ class GameBoard:
                 y_space += wide
         return tiles
 
-    def update_game_board(self, click_button: int ) -> None:
+    def update_game_board(self, click_button: int) -> None:
+        count_max = self.game_settings.width ** self.game_settings.dimensions - self.game_settings.mine_count
+        count = 0
         for idx in product(*[range(s) for s in self.tile_board.shape]):
             if self.tile_board[idx].is_mouse_overed():
                 if click_button == 1:
